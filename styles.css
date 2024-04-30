@@ -1,0 +1,52 @@
+body {
+    position: relative;
+    background-color: #06000a;
+    font-size: 16px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    min-width: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+    color: #e6e6e8;
+    font: normal 1em 'Roboto Slab', sans-serif;
+}
+
+header, footer, .section {
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.face {
+    background-color: #c43235;
+    color: #fff;
+}
+
+.face-title.one {
+    font-size: 3rem;
+}
+
+.face-subtitle {
+    font-size: 1.25rem;
+}
+
+.section {
+    background-color: transparent;
+    color: #e6e6e8;
+}
+
+.tool-logos img {
+    height: 50px;
+    margin: 10px;
+}
+
+.footer {
+    background-color: #25282e;
+    color: #c5bbb4;
+}
