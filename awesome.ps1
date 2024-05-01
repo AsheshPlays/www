@@ -1,5 +1,6 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName Microsoft.VisualBasic
 
 function Install-Chocolatey {
     if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
@@ -7,69 +8,87 @@ function Install-Chocolatey {
     }
 }
 
-function Install-SelectedApps {
+function Get-InstalledApps {
     Install-Chocolatey
-    $global:selectedApps | ForEach-Object {
-        Start-Process powershell -ArgumentList "choco install $_ -y" -Verb RunAs -Wait
+    $installed = choco list --local-only
+    foreach ($item in $panel.Controls) {
+        if ($item -is [System.Windows.Forms.CheckBox]) {
+            $item.Checked = $installed -like "*$($item.Tag)*"
+        }
     }
 }
 
+function Install-SelectedApps {
+    Install-Chocolatey
+    $selectedApps = $panel.Controls | Where-Object { $_ -is [System.Windows.Forms.CheckBox] -and $_.Checked } | ForEach-Object { $_.Tag }
+    $selectedApps | ForEach-Object { Start-Process powershell -ArgumentList "choco install $_ -y" -Verb RunAs -Wait }
+}
+
+function Uninstall-SelectedApps {
+    Install-Chocolatey
+    $selectedApps = $panel.Controls | Where-Object { $_ -is [System.Windows.Forms.CheckBox] -and $_.Checked } | ForEach-Object { $_.Tag }
+    $selectedApps | ForEach-Object { Start-Process powershell -ArgumentList "choco uninstall $_ -y" -Verb RunAs -Wait }
+}
+
+function Clean-And-Exit {
+    [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory([Environment]::GetFolderPath('LocalApplicationData') + '\Temp', [Microsoft.VisualBasic.FileIO.DeleteDirectoryOption]::DeleteAllContents)
+    Clear-RecycleBin -Force
+    $form.Close()
+}
+
 $form = New-Object System.Windows.Forms.Form
-$form.Text = 'Ashesh Development Windows Tool Menu'
+$form.Text = 'Ashesh Development: Tool Menu'
 $form.Size = New-Object System.Drawing.Size(800,600)
 $form.StartPosition = 'CenterScreen'
 $form.Font = New-Object System.Drawing.Font('Consolas', 10)
 $form.BackColor = [System.Drawing.Color]::FromArgb(30, 30, 30)
 $form.ForeColor = [System.Drawing.Color]::FromArgb(0, 255, 0)
 
-$scrollBar = New-Object System.Windows.Forms.VScrollBar
-$scrollBar.Dock = [System.Windows.Forms.DockStyle]::Right
-
 $panel = New-Object System.Windows.Forms.Panel
-$panel.Dock = [System.Windows.Forms.DockStyle]::Fill
+$panel.Location = New-Object System.Drawing.Point(10, 50)
+$panel.Size = New-Object System.Drawing.Size(760, 400)
 $panel.AutoScroll = $true
 
-$categories = @{
-    'General Applications' = 'firefox, vlc, 7zip';
-    'Development Tools' = 'git, vscode, nodejs';
-    'Communication Apps' = 'discord, slack, skype';
-    'Browsers' = 'chrome, edge, firefox';
-}
-
 $y = 10
-foreach ($category in $categories.Keys) {
-    $label = New-Object System.Windows.Forms.Label
-    $label.Text = $category
-    $label.Location = New-Object System.Drawing.Point(10, $y)
-    $label.Size = New-Object System.Drawing.Size(200, 20)
-    $panel.Controls.Add($label)
+$applications = 'firefox, vlc, 7zip, git, vscode, nodejs, discord, slack, skype, chrome, edge'
+foreach ($app in $applications.Split(', ')) {
+    $checkBox = New-Object System.Windows.Forms.CheckBox
+    $checkBox.Text = $app.Trim()
+    $checkBox.Location = New-Object System.Drawing.Point(10, $y)
+    $checkBox.Size = New-Object System.Drawing.Size(200, 20)
+    $checkBox.Tag = $app.Trim()
+    $panel.Controls.Add($checkBox)
     $y += 30
-    $apps = $categories[$category].Split(', ')
-    foreach ($app in $apps) {
-        $checkBox = New-Object System.Windows.Forms.CheckBox
-        $checkBox.Text = $app
-        $checkBox.Location = New-Object System.Drawing.Point(30, $y)
-        $checkBox.Size = New-Object System.Drawing.Size(200, 20)
-        $checkBox.Tag = $app
-        $panel.Controls.Add($checkBox)
-        $y += 30
-    }
 }
 
-$installButton = New-Object System.Windows.Forms.Button
-$installButton.Text = 'Install Selected Applications'
-$installButton.Location = New-Object System.Drawing.Point(600, 520)
-$installButton.Size = New-Object System.Drawing.Size(180, 30)
-$installButton.Add_Click({
-    $global:selectedApps = @()
-    $panel.Controls | Where-Object {$_ -is [System.Windows.Forms.CheckBox] -and $_.Checked} | ForEach-Object {
-        $global:selectedApps += $_.Tag
-    }
-    Install-SelectedApps
-})
+$buttonGetInstalled = New-Object System.Windows.Forms.Button
+$buttonGetInstalled.Text = 'Get Installed Apps'
+$buttonGetInstalled.Location = New-Object System.Drawing.Point(10, 460)
+$buttonGetInstalled.Size = New-Object System.Drawing.Size(150, 30)
+$buttonGetInstalled.Add_Click({ Get-InstalledApps })
 
-$form.Controls.Add($scrollBar)
+$buttonInstallSelected = New-Object System.Windows.Forms.Button
+$buttonInstallSelected.Text = 'Install Selected Apps'
+$buttonInstallSelected.Location = New-Object System.Drawing.Point(170, 460)
+$buttonInstallSelected.Size = New-Object System.Drawing.Size(150, 30)
+$buttonInstallSelected.Add_Click({ Install-SelectedApps })
+
+$buttonUninstallSelected = New-Object System.Windows.Forms.Button
+$buttonUninstallSelected.Text = 'Uninstall Selected Apps'
+$buttonUninstallSelected.Location = New-Object System.Drawing.Point(330, 460)
+$buttonUninstallSelected.Size = New-Object System.Drawing.Size(150, 30)
+$buttonUninstallSelected.Add_Click({ Uninstall-SelectedApps })
+
+$buttonCleanExit = New-Object System.Windows.Forms.Button
+$buttonCleanExit.Text = 'Clean and Exit'
+$buttonCleanExit.Location = New-Object System.Drawing.Point(490, 460)
+$buttonCleanExit.Size = New-Object System.Drawing.Size(150, 30)
+$buttonCleanExit.Add_Click({ Clean-And-Exit })
+
 $form.Controls.Add($panel)
-$form.Controls.Add($installButton)
+$form.Controls.Add($buttonGetInstalled)
+$form.Controls.Add($buttonInstallSelected)
+$form.Controls.Add($buttonUninstallSelected)
+$form.Controls.Add($buttonCleanExit)
 
 $form.ShowDialog()
