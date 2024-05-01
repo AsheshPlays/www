@@ -3,65 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashesh Development - Game Dev Log</title>
+    <title>Ashesh Development</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="face face-body">
-        <div class="container">
-            <h1 class="face-title one">Ashesh Development</h1>
-            <p class="face-subtitle">Explore my journey through game development using Unity and more!</p>
+    <div class="terminal">
+        <div class="fakeMenu">
+            <div class="fakeButtons fakeClose"></div>
+            <div class="fakeButtons fakeMinimize"></div>
+            <div class="fakeButtons fakeZoom"></div>
         </div>
-    </header>
-
-    <section class="section dev-log">
-        <div class="container">
-            <h2>Development Updates</h2>
-            <p>Update #1: Commenced phase one of our Unity project focusing on real-time strategy elements.</p>
-            <p>Update #2: Utilizing Blender for 3D asset creation, targeting enhanced graphical fidelity.</p>
+        <div class="fakeScreen">
+            <p class="line line1">$ Initializing Ashesh Development Environment...</p>
+            <p class="line line2">$ Loading modules...</p>
+            <p class="line line3">$ Ready to manage startup programs.</p>
+            <p class="line line4">$ Click the "StartUp Manager" button below to proceed.</p>
         </div>
-    </section>
-
-    <section class="section scripts">
-        <div class="container">
-            <h2>Startup Manager PowerShell Script</h2>
-            <p>Click the button below to copy the PowerShell command to your clipboard, then paste it into a PowerShell terminal to run the script.</p>
-            <button onclick="copyToClipboard()">Copy PowerShell Command</button>
-        </div>
-    </section>
-
-    <section class="section tools">
-        <div class="container">
-            <h2>Tools and Technologies</h2>
-            <div class="tool-logos">
-                <img src="unity-logo.png" alt="Unity Engine">
-                <img src="unreal-logo.png" alt="Unreal Engine">
-                <img src="blender-logo.png" alt="Blender">
-                <img src="3ds-max-logo.png" alt="3DS Max">
-                <img src="rider-logo.png" alt="JetBrains Rider">
-                <img src="pycharm-logo.png" alt="PyCharm">
-                <img src="github-copilot-logo.png" alt="GitHub Copilot">
-                <img src="git-logo.png" alt="Git">
-            </div>
-        </div>
-    </section>
-
-    <footer class="section footer">
-        <div class="container">
-            <span>© 2024 Ashesh Development. All rights reserved. Follow us on <a href="#">Social Media</a></span>
-        </div>
-    </footer>
-
+    </div>
+    <div class="container">
+        <button onclick="copyCommandToClipboard()">StartUp Manager</button>
+        <p class="instructions">Click the button to copy the PowerShell command. Then, open an elevated PowerShell prompt, paste the command, and press Enter.</p>
+    </div>
     <script>
-    function copyToClipboard() {
-        const command = 'iwr -Uri "https://raw.githubusercontent.com/asheshplays/www/main/StartupManager.ps1" -UseBasicParsing | iex';
-        navigator.clipboard.writeText(command).then(() => {
-            alert('Command copied to clipboard! Open PowerShell and paste the command to run.');
-        }, (err) => {
-            alert('Failed to copy command: ' + err);
-        });
-    }
+        function copyCommandToClipboard() {
+            const command = 'iwr -Uri "https://raw.githubusercontent.com/AsheshPlays/www/main/StartupManager.ps1" -UseBasicParsing | iex';
+            navigator.clipboard.writeText(command).then(() => {
+                alert('Command copied to clipboard! Open an elevated PowerShell prompt, paste the command, and press Enter.');
+            }, (err) => {
+                alert('Failed to copy command: ' + err);
+            });
+        }
     </script>
 </body>
 </html>
