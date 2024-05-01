@@ -1,52 +1,96 @@
-body {
-    position: relative;
-    background-color: #06000a;
-    font-size: 16px;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    min-width: 300px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    text-rendering: optimizeLegibility;
-    text-size-adjust: 100%;
-    color: #e6e6e8;
-    font: normal 1em 'Roboto Slab', sans-serif;
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    background-color: #1e1e1e;
+    color: #33ff33;
+    overflow: hidden;
 }
 
-header, footer, .section {
+.terminal {
+    background-color: #000;
     padding: 20px;
-    text-align: center;
+    max-width: 800px;
+    margin: 50px auto;
+    box-shadow: 0 0 10px #000;
+    position: relative;
+    font-size: 16px;
+}
+
+.fakeMenu {
+    background-color: #333;
+    height: 25px;
+    width: 100%;
+}
+
+.fakeButtons {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    position: absolute;
+}
+
+.fakeClose {
+    background-color: #ff5f56;
+    left: 5px;
+}
+
+.fakeMinimize {
+    background-color: #ffbd2e;
+    left: 25px;
+}
+
+.fakeZoom {
+    background-color: #27c93f;
+    left: 45px;
+}
+
+.fakeScreen {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    padding: 10px;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 20px;
 }
 
-.face {
-    background-color: #c43235;
+button {
+    background-color: #333;
     color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.face-title.one {
-    font-size: 3rem;
+button:hover {
+    background-color: #555;
 }
 
-.face-subtitle {
-    font-size: 1.25rem;
+.instructions {
+    color: #999;
+    margin-top: 10px;
 }
 
-.section {
-    background-color: transparent;
-    color: #e6e6e8;
+.line {
+    opacity: 0;
+    animation: line-animation 5s infinite;
 }
 
-.tool-logos img {
-    height: 50px;
-    margin: 10px;
-}
+.line1 { animation-delay: 0s; }
+.line2 { animation-delay: 1s; }
+.line3 { animation-delay: 3s; }
+.line4 { animation-delay: 4s; }
 
-.footer {
-    background-color: #25282e;
-    color: #c5bbb4;
+@keyframes line-animation {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
 }
