@@ -22,16 +22,12 @@ $form.Font = New-Object System.Drawing.Font('Consolas', 10)
 $form.BackColor = [System.Drawing.Color]::FromArgb(30, 30, 30)
 $form.ForeColor = [System.Drawing.Color]::FromArgb(0, 255, 0)
 
-$panel = New-Object System.Windows.Forms.Panel
-$panel.Location = New-Object System.Drawing.Point(30, 40)
-$panel.Size = New-Object System.Drawing.Size(720, 480)
-
 $scrollBar = New-Object System.Windows.Forms.VScrollBar
 $scrollBar.Dock = [System.Windows.Forms.DockStyle]::Right
-$scrollBar.Scroll += {
-    $panel.VerticalScroll.Value = $scrollBar.Value
-}
-$panel.Controls.Add($scrollBar)
+
+$panel = New-Object System.Windows.Forms.Panel
+$panel.Dock = [System.Windows.Forms.DockStyle]::Fill
+$panel.AutoScroll = $true
 
 $categories = @{
     'General Applications' = 'firefox, vlc, 7zip';
@@ -60,12 +56,10 @@ foreach ($category in $categories.Keys) {
     }
 }
 
-$scrollBar.Maximum = $y - $panel.Height + $scrollBar.LargeChange
-
 $installButton = New-Object System.Windows.Forms.Button
 $installButton.Text = 'Install Selected Applications'
-$installButton.Location = New-Object System.Drawing.Point(30, 530)
-$installButton.Size = New-Object System.Drawing.Size(200, 30)
+$installButton.Location = New-Object System.Drawing.Point(600, 520)
+$installButton.Size = New-Object System.Drawing.Size(180, 30)
 $installButton.Add_Click({
     $global:selectedApps = @()
     $panel.Controls | Where-Object {$_ -is [System.Windows.Forms.CheckBox] -and $_.Checked} | ForEach-Object {
@@ -73,6 +67,8 @@ $installButton.Add_Click({
     }
     Install-SelectedApps
 })
+
+$form.Controls.Add($scrollBar)
 $form.Controls.Add($panel)
 $form.Controls.Add($installButton)
 
