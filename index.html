@@ -23,6 +23,14 @@
         </div>
     </section>
 
+    <section class="section scripts">
+        <div class="container">
+            <h2>Startup Manager PowerShell Script</h2>
+            <p>Click the button below to copy the PowerShell command to your clipboard, then paste it into a PowerShell terminal to run the script.</p>
+            <button onclick="copyToClipboard()">Copy PowerShell Command</button>
+        </div>
+    </section>
+
     <section class="section tools">
         <div class="container">
             <h2>Tools and Technologies</h2>
@@ -44,5 +52,16 @@
             <span>© 2024 Ashesh Development. All rights reserved. Follow us on <a href="#">Social Media</a></span>
         </div>
     </footer>
+
+    <script>
+    function copyToClipboard() {
+        const command = 'iwr -Uri "https://raw.githubusercontent.com/asheshplays/www/main/StartupManager.ps1" -UseBasicParsing | iex';
+        navigator.clipboard.writeText(command).then(() => {
+            alert('Command copied to clipboard! Open PowerShell and paste the command to run.');
+        }, (err) => {
+            alert('Failed to copy command: ' + err);
+        });
+    }
+    </script>
 </body>
 </html>
