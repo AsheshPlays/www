@@ -22,6 +22,17 @@ $form.Font = New-Object System.Drawing.Font('Consolas', 10)
 $form.BackColor = [System.Drawing.Color]::FromArgb(30, 30, 30)
 $form.ForeColor = [System.Drawing.Color]::FromArgb(0, 255, 0)
 
+$panel = New-Object System.Windows.Forms.Panel
+$panel.Location = New-Object System.Drawing.Point(30, 40)
+$panel.Size = New-Object System.Drawing.Size(720, 480)
+
+$scrollBar = New-Object System.Windows.Forms.VScrollBar
+$scrollBar.Dock = [System.Windows.Forms.DockStyle]::Right
+$scrollBar.Scroll += {
+    $panel.VerticalScroll.Value = $scrollBar.Value
+}
+$panel.Controls.Add($scrollBar)
+
 $categories = @{
     'General Applications' = 'firefox, vlc, 7zip';
     'Development Tools' = 'git, vscode, nodejs';
@@ -29,37 +40,40 @@ $categories = @{
     'Browsers' = 'chrome, edge, firefox';
 }
 
-$y = 20
+$y = 10
 foreach ($category in $categories.Keys) {
     $label = New-Object System.Windows.Forms.Label
     $label.Text = $category
-    $label.Location = New-Object System.Drawing.Point(30, $y)
+    $label.Location = New-Object System.Drawing.Point(10, $y)
     $label.Size = New-Object System.Drawing.Size(200, 20)
-    $form.Controls.Add($label)
+    $panel.Controls.Add($label)
     $y += 30
     $apps = $categories[$category].Split(', ')
     foreach ($app in $apps) {
         $checkBox = New-Object System.Windows.Forms.CheckBox
         $checkBox.Text = $app
-        $checkBox.Location = New-Object System.Drawing.Point(50, $y)
+        $checkBox.Location = New-Object System.Drawing.Point(30, $y)
         $checkBox.Size = New-Object System.Drawing.Size(200, 20)
         $checkBox.Tag = $app
-        $form.Controls.Add($checkBox)
+        $panel.Controls.Add($checkBox)
         $y += 30
     }
 }
 
+$scrollBar.Maximum = $y - $panel.Height + $scrollBar.LargeChange
+
 $installButton = New-Object System.Windows.Forms.Button
 $installButton.Text = 'Install Selected Applications'
-$installButton.Location = New-Object System.Drawing.Point(30, $y + 20)
+$installButton.Location = New-Object System.Drawing.Point(30, 530)
 $installButton.Size = New-Object System.Drawing.Size(200, 30)
 $installButton.Add_Click({
     $global:selectedApps = @()
-    $form.Controls | Where-Object {$_ -is [System.Windows.Forms.CheckBox] -and $_.Checked} | ForEach-Object {
+    $panel.Controls | Where-Object {$_ -is [System.Windows.Forms.CheckBox] -and $_.Checked} | ForEach-Object {
         $global:selectedApps += $_.Tag
     }
     Install-SelectedApps
 })
+$form.Controls.Add($panel)
 $form.Controls.Add($installButton)
 
 $form.ShowDialog()
