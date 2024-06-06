@@ -25,7 +25,7 @@
     <button onclick="copyCommandToClipboard()">StartUp Manager</button>
     <button onclick="sheeeshAction()">Sheeesh</button>
     <button id="psCommandButton">Copy PS Command</button>
-    <button onclick="showImages()">Show Images</button>
+    <a href="images.html"><button>Show Images</button></a>
     <p class="instructions">Click the button to copy the PowerShell command. Then, open an elevated PowerShell prompt, paste the command, and press Enter.</p>
 </div>
 <div id="imageContainer" style="display: none;">
@@ -55,9 +55,7 @@
 
     function showImages() {
         const images = [
-            'AsheshDevBanner.png',
-            'image2.jpg',
-            'image3.jpg'
+            'images/AsheshDevBanner.png'
         ];
         const imageContainer = document.getElementById('imageContainer');
         const imageList = document.getElementById('imageList');
