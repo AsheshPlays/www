@@ -25,7 +25,12 @@
     <button onclick="copyCommandToClipboard()">StartUp Manager</button>
     <button onclick="sheeeshAction()">Sheeesh</button>
     <button id="psCommandButton">Copy PS Command</button>
+    <button onclick="showImages()">Show Images</button>
     <p class="instructions">Click the button to copy the PowerShell command. Then, open an elevated PowerShell prompt, paste the command, and press Enter.</p>
+</div>
+<div id="imageContainer" style="display: none;">
+    <h2>Image Files</h2>
+    <div id="imageList"></div>
 </div>
 <script>
     function copyCommandToClipboard() {
@@ -47,6 +52,29 @@
             alert('Failed to copy command: ' + err);
         });
     });
+
+    function showImages() {
+        const images = [
+            'image1.jpg',
+            'image2.jpg',
+            'image3.jpg'
+        ];
+        const imageContainer = document.getElementById('imageContainer');
+        const imageList = document.getElementById('imageList');
+        imageList.innerHTML = '';
+        images.forEach(image => {
+            const img = document.createElement('img');
+            img.src = image;
+            img.style.width = '100px';
+            img.style.height = '100px';
+            img.style.margin = '10px';
+            img.onclick = () => {
+                window.open(image, '_blank');
+            };
+            imageList.appendChild(img);
+        });
+        imageContainer.style.display = 'block';
+    }
 </script>
 </body>
 </html>
