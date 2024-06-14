@@ -6,6 +6,64 @@
     <title>Image Gallery</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+        .terminal {
+            width: 90%;
+            max-width: 800px;
+            background-color: #1a1a1a;
+            color: #e6e6e6;
+            border-radius: 5px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .fakeMenu {
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px;
+        }
+        .fakeButtons {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+        .fakeClose {
+            background-color: #ff605c;
+        }
+        .fakeMinimize {
+            background-color: #ffbd44;
+        }
+        .fakeZoom {
+            background-color: #00ca4e;
+        }
+        .fakeScreen {
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .container img {
+            width: 100%;
+            max-width: 100%;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <div class="terminal">
@@ -20,10 +78,10 @@
 </div>
 <div class="container">
     <a href="images/AsheshDevBanner.png" target="_blank">
-        <img src="images/AsheshDevBanner.png" alt="Ashesh Development Banner" style="width:100%; max-width:800px; margin: 20px auto; display: block;">
+        <img src="images/AsheshDevBanner.png" alt="Ashesh Development Banner">
     </a>
     <a href="images/appscriptbanner.png" target="_blank">
-        <img src="images/appscriptbanner.png" alt="App Script Banner" style="width:100%; max-width:300px; margin: 20px auto; display: block;">
+        <img src="images/appscriptbanner.png" alt="App Script Banner">
     </a>
 </div>
 </body>
