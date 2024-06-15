@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashesh Glitch</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <title>Glitch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -16,6 +16,7 @@
             width: 100%;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -24,14 +25,14 @@
 
         .glitch {
             position: relative;
-            font-size: 120px;
-            font-weight: 700;
+            font-size: 60px;
+            font-weight: 400;
             line-height: 1.2;
             color: #e1eef6;
             letter-spacing: 8px;
             z-index: 1;
             cursor: pointer;
-            animation: normal-glitch 2s ease-in-out infinite alternate;
+            animation: shift 3s ease-in-out infinite alternate;
         }
 
         .glitch:before {
@@ -45,7 +46,7 @@
             background-color: #111111;
             overflow: hidden;
             clip: rect(0, 900px, 0, 0);
-            animation: noise-before 3s infinite linear alternate-reverse;
+            animation: noise-before 2s infinite linear alternate-reverse;
         }
 
         .glitch:after {
@@ -62,106 +63,74 @@
             animation: noise-after 2s infinite linear alternate-reverse;
         }
 
+        .quote {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #e1eef6;
+        }
+
         @keyframes noise-before {
-            0% { clip: rect(61px, 9999px, 52px, 0); }
-            5% { clip: rect(33px, 9999px, 144px, 0); }
-            10% { clip: rect(121px, 9999px, 115px, 0); }
-            15% { clip: rect(144px, 9999px, 162px, 0); }
-            20% { clip: rect(62px, 9999px, 180px, 0); }
-            25% { clip: rect(34px, 9999px, 42px, 0); }
-            30% { clip: rect(147px, 9999px, 179px, 0); }
-            35% { clip: rect(99px, 9999px, 63px, 0); }
-            40% { clip: rect(188px, 9999px, 122px, 0); }
-            45% { clip: rect(154px, 9999px, 14px, 0); }
-            50% { clip: rect(63px, 9999px, 37px, 0); }
-            55% { clip: rect(161px, 9999px, 147px, 0); }
-            60% { clip: rect(109px, 9999px, 175px, 0); }
-            65% { clip: rect(157px, 9999px, 88px, 0); }
-            70% { clip: rect(173px, 9999px, 131px, 0); }
-            75% { clip: rect(62px, 9999px, 70px, 0); }
-            80% { clip: rect(24px, 9999px, 153px, 0); }
-            85% { clip: rect(138px, 9999px, 40px, 0); }
-            90% { clip: rect(79px, 9999px, 136px, 0); }
-            95% { clip: rect(25px, 9999px, 34px, 0); }
-            100% { clip: rect(173px, 9999px, 166px, 0); }
+            0% { clip: rect(0, 900px, 0, 0); }
+            10% { clip: rect(10px, 900px, 50px, 0); }
+            20% { clip: rect(20px, 900px, 40px, 0); }
+            30% { clip: rect(30px, 900px, 60px, 0); }
+            40% { clip: rect(40px, 900px, 50px, 0); }
+            50% { clip: rect(50px, 900px, 70px, 0); }
+            60% { clip: rect(60px, 900px, 80px, 0); }
+            70% { clip: rect(70px, 900px, 90px, 0); }
+            80% { clip: rect(80px, 900px, 100px, 0); }
+            90% { clip: rect(90px, 900px, 110px, 0); }
+            100% { clip: rect(100px, 900px, 120px, 0); }
         }
 
         @keyframes noise-after {
-            0% { clip: rect(26px, 9999px, 33px, 0); }
-            5% { clip: rect(140px, 9999px, 198px, 0); }
-            10% { clip: rect(184px, 9999px, 89px, 0); }
-            15% { clip: rect(121px, 9999px, 6px, 0); }
-            20% { clip: rect(181px, 9999px, 99px, 0); }
-            25% { clip: rect(154px, 9999px, 133px, 0); }
-            30% { clip: rect(134px, 9999px, 169px, 0); }
-            35% { clip: rect(26px, 9999px, 187px, 0); }
-            40% { clip: rect(147px, 9999px, 137px, 0); }
-            45% { clip: rect(31px, 9999px, 52px, 0); }
-            50% { clip: rect(191px, 9999px, 109px, 0); }
-            55% { clip: rect(74px, 9999px, 54px, 0); }
-            60% { clip: rect(145px, 9999px, 75px, 0); }
-            65% { clip: rect(153px, 9999px, 198px, 0); }
-            70% { clip: rect(99px, 9999px, 136px, 0); }
-            75% { clip: rect(118px, 9999px, 192px, 0); }
-            80% { clip: rect(1px, 9999px, 83px, 0); }
-            85% { clip: rect(145px, 9999px, 98px, 0); }
-            90% { clip: rect(121px, 9999px, 154px, 0); }
-            95% { clip: rect(156px, 9999px, 44px, 0); }
-            100% { clip: rect(67px, 9999px, 122px, 0); }
+            0% { clip: rect(0, 900px, 0, 0); }
+            10% { clip: rect(10px, 900px, 60px, 0); }
+            20% { clip: rect(20px, 900px, 50px, 0); }
+            30% { clip: rect(30px, 900px, 70px, 0); }
+            40% { clip: rect(40px, 900px, 60px, 0); }
+            50% { clip: rect(50px, 900px, 80px, 0); }
+            60% { clip: rect(60px, 900px, 90px, 0); }
+            70% { clip: rect(70px, 900px, 100px, 0); }
+            80% { clip: rect(80px, 900px, 110px, 0); }
+            90% { clip: rect(90px, 900px, 120px, 0); }
+            100% { clip: rect(100px, 900px, 130px, 0); }
         }
 
-        @keyframes normal-glitch {
-            0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% { transform: skewX(0deg); }
-            41% { transform: skewX(10deg); }
-            42% { transform: skewX(-10deg); }
-            59% { transform: skewX(40deg) skewY(10deg); }
-            60% { transform: skewX(-40deg) skewY(-10deg); }
-            63% { transform: skewX(10deg) skewY(-5deg); }
-            70% { transform: skewX(-50deg) skewY(-20deg); }
-            71% { transform: skewX(10deg) skewY(-10deg); }
-        }
-
-        @keyframes haywire-glitch {
-            0% { transform: skewX(0deg); }
-            5% { transform: skewX(10deg); }
-            10% { transform: skewX(-10deg); }
-            15% { transform: skewX(20deg) skewY(10deg); }
-            20% { transform: skewX(-20deg) skewY(-10deg); }
-            25% { transform: skewX(30deg) skewY(15deg); }
-            30% { transform: skewX(-30deg) skewY(-15deg); }
-            35% { transform: skewX(40deg) skewY(20deg); }
-            40% { transform: skewX(-40deg) skewY(-20deg); }
-            45% { transform: skewX(50deg) skewY(25deg); }
-            50% { transform: skewX(-50deg) skewY(-25deg); }
-            55% { transform: skewX(60deg) skewY(30deg); }
-            60% { transform: skewX(-60deg) skewY(-30deg); }
-            65% { transform: skewX(70deg) skewY(35deg); }
-            70% { transform: skewX(-70deg) skewY(-35deg); }
-            75% { transform: skewX(80deg) skewY(40deg); }
-            80% { transform: skewX(-80deg) skewY(-40deg); }
-            85% { transform: skewX(90deg) skewY(45deg); }
-            90% { transform: skewX(-90deg) skewY(-45deg); }
-            95% { transform: skewX(100deg) skewY(50deg); }
-            100% { transform: skewX(-100deg) skewY(-50deg); }
+        @keyframes shift {
+            0%, 100% { transform: skewX(0deg); }
+            50% { transform: skewX(10deg); }
         }
 
         @keyframes zoom-out {
-            0% { transform: scale(1); }
-            100% { transform: scale(5); opacity: 0; }
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.5); opacity: 0; }
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fade-out {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
 <body>
     <div class="glitch-wrapper">
-        <div class="glitch" data-glitch="ashesh.pro" id="glitchText">ashesh.pro</div>
+        <div class="glitch" data-glitch="glitch" id="glitchText">glitch</div>
+        <div class="quote">"If life gives you glitches, code a way to turn them into features"<br>-ashesh 2024</div>
     </div>
     <script>
         document.getElementById('glitchText').addEventListener('click', function() {
             const glitchElement = this;
-            glitchElement.style.animation = 'haywire-glitch 0.1s infinite';
-
+            glitchElement.style.animation = 'shift 0.1s infinite, fade-out 1s forwards';
+            
             setTimeout(() => {
                 glitchElement.style.animation = 'zoom-out 1s ease-in forwards';
+                document.body.style.animation = 'fade-out 1s forwards';
                 setTimeout(() => {
                     window.location.href = 'main.html';
                 }, 1000);
