@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glitch</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -21,12 +21,13 @@
             justify-content: center;
             text-align: center;
             background-color: #111111;
+            position: relative;
         }
 
         .glitch {
             position: relative;
             font-size: 120px;
-            font-weight: 400;
+            font-weight: 900;
             line-height: 1.2;
             color: #e1eef6;
             letter-spacing: 8px;
@@ -64,9 +65,11 @@
         }
 
         .quote {
-            margin-top: 20px;
-            font-size: 16px;
+            position: absolute;
+            bottom: 20px;
+            font-size: 14px;
             color: #e1eef6;
+            text-align: center;
         }
 
         @keyframes noise-before {
@@ -127,6 +130,7 @@
 <body>
     <div class="glitch-wrapper">
         <div class="glitch" data-glitch="glitch" id="glitchText">glitch</div>
+        <img src="images/appscriptbanner.png" alt="App Script Banner">
         <div class="quote">"If life gives you glitches, code a way to turn them into features"<br>-ashesh 2024</div>
     </div>
     <script>
