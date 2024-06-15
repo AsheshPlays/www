@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #111111;
             overflow: hidden; /* Remove scrollbar */
         }
@@ -32,7 +32,6 @@
             z-index: 1;
             cursor: pointer;
             animation: shift 2s ease-in-out infinite alternate;
-            font-family: 'Roboto', sans-serif;
         }
 
         .glitch:before {
@@ -47,7 +46,6 @@
             overflow: hidden;
             clip: rect(0, 900px, 0, 0);
             animation: noise-before 3s infinite linear alternate-reverse;
-            font-family: 'Roboto', sans-serif;
         }
 
         .glitch:after {
@@ -62,7 +60,6 @@
             overflow: hidden;
             clip: rect(0, 900px, 0, 0);
             animation: noise-after 2s infinite linear alternate-reverse;
-            font-family: 'Roboto', sans-serif;
         }
 
         @keyframes noise-before {
@@ -114,14 +111,32 @@
         }
 
         @keyframes shift {
-            0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% { transform: skewX(0deg); }
-            41% { transform: skewX(10deg); }
-            42% { transform: skewX(-10deg); }
-            59% { transform: skewX(40deg) skewY(10deg); }
-            60% { transform: skewX(-40deg) skewY(-10deg); }
-            63% { transform: skewX(10deg) skewY(-5deg); }
-            70% { transform: skewX(-50deg) skewY(-20deg); }
-            71% { transform: skewX(10deg) skewY(-10deg); }
+            0% { transform: skewX(0deg); }
+            5% { transform: skewX(10deg); }
+            10% { transform: skewX(-10deg); }
+            15% { transform: skewX(20deg) skewY(10deg); }
+            20% { transform: skewX(-20deg) skewY(-10deg); }
+            25% { transform: skewX(30deg) skewY(15deg); }
+            30% { transform: skewX(-30deg) skewY(-15deg); }
+            35% { transform: skewX(40deg) skewY(20deg); }
+            40% { transform: skewX(-40deg) skewY(-20deg); }
+            45% { transform: skewX(50deg) skewY(25deg); }
+            50% { transform: skewX(-50deg) skewY(-25deg); }
+            55% { transform: skewX(60deg) skewY(30deg); }
+            60% { transform: skewX(-60deg) skewY(-30deg); }
+            65% { transform: skewX(70deg) skewY(35deg); }
+            70% { transform: skewX(-70deg) skewY(-35deg); }
+            75% { transform: skewX(80deg) skewY(40deg); }
+            80% { transform: skewX(-80deg) skewY(-40deg); }
+            85% { transform: skewX(90deg) skewY(45deg); }
+            90% { transform: skewX(-90deg) skewY(-45deg); }
+            95% { transform: skewX(100deg) skewY(50deg); }
+            100% { transform: skewX(-100deg) skewY(-50deg); }
+        }
+
+        @keyframes zoom-out {
+            0% { transform: scale(1); }
+            100% { transform: scale(5); opacity: 0; }
         }
     </style>
 </head>
@@ -132,20 +147,14 @@
     <script>
         document.getElementById('glitchText').addEventListener('click', function() {
             const glitchElement = this;
-            let animationDuration = 2; // Start with 2 seconds
-            const maxDuration = 3; // Max duration of 3 seconds
+            glitchElement.style.animation = 'shift 0.1s infinite';
 
-            const interval = setInterval(() => {
-                animationDuration -= 0.1; // Decrease animation duration
-                glitchElement.style.animationDuration = `${animationDuration}s`;
-                
-                if (animationDuration <= 0.1) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        window.location.href = 'main.html';
-                    }, 1000);
-                }
-            }, (maxDuration - animationDuration) * 100); // Adjust interval to make it faster
+            setTimeout(() => {
+                glitchElement.style.animation = 'zoom-out 1s ease-in forwards';
+                setTimeout(() => {
+                    window.location.href = 'main.html';
+                }, 1000);
+            }, 100);
         });
     </script>
 </body>
