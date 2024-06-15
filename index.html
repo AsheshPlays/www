@@ -31,7 +31,7 @@
             letter-spacing: 8px;
             z-index: 1;
             cursor: pointer;
-            animation: shift 2s ease-in-out infinite alternate;
+            animation: normal-glitch 2s ease-in-out infinite alternate;
         }
 
         .glitch:before {
@@ -110,7 +110,18 @@
             100% { clip: rect(67px, 9999px, 122px, 0); }
         }
 
-        @keyframes shift {
+        @keyframes normal-glitch {
+            0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% { transform: skewX(0deg); }
+            41% { transform: skewX(10deg); }
+            42% { transform: skewX(-10deg); }
+            59% { transform: skewX(40deg) skewY(10deg); }
+            60% { transform: skewX(-40deg) skewY(-10deg); }
+            63% { transform: skewX(10deg) skewY(-5deg); }
+            70% { transform: skewX(-50deg) skewY(-20deg); }
+            71% { transform: skewX(10deg) skewY(-10deg); }
+        }
+
+        @keyframes haywire-glitch {
             0% { transform: skewX(0deg); }
             5% { transform: skewX(10deg); }
             10% { transform: skewX(-10deg); }
@@ -142,12 +153,12 @@
 </head>
 <body>
     <div class="glitch-wrapper">
-        <div class="glitch" data-glitch="ashesh" id="glitchText">ashesh</div>
+        <div class="glitch" data-glitch="ashesh.pro" id="glitchText">ashesh.pro</div>
     </div>
     <script>
         document.getElementById('glitchText').addEventListener('click', function() {
             const glitchElement = this;
-            glitchElement.style.animation = 'shift 0.1s infinite';
+            glitchElement.style.animation = 'haywire-glitch 0.1s infinite';
 
             setTimeout(() => {
                 glitchElement.style.animation = 'zoom-out 1s ease-in forwards';
