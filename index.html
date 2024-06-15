@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashesh Glitch</title>
     <style>
+        body {
+            font-family: sans-serif;
+            background-color: #111111;
+        }
+
         .glitch-wrapper {
             width: 100%;
             height: 100vh;
@@ -12,7 +17,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-color: #222;
+            background-color: #111111;
         }
 
         .glitch {
@@ -20,11 +25,11 @@
             font-size: 120px;
             font-weight: 700;
             line-height: 1.2;
-            color: #fff;
+            color: #e1eef6;
             letter-spacing: 8px;
-            animation: shift 4s ease-in-out infinite alternate;
             z-index: 1;
             cursor: pointer;
+            animation: shift 2s ease-in-out infinite alternate;
         }
 
         .glitch:before {
@@ -34,8 +39,8 @@
             left: -2px;
             text-shadow: -1px 0 #00ffff;
             width: 100%;
-            color: #fff;
-            background-color: #222;
+            color: #e1eef6;
+            background-color: #111111;
             overflow: hidden;
             clip: rect(0, 900px, 0, 0);
             animation: noise-before 3s infinite linear alternate-reverse;
@@ -48,8 +53,8 @@
             left: 2px;
             text-shadow: 1px 0 #ff00ff;
             width: 100%;
-            color: #fff;
-            background-color: #222;
+            color: #e1eef6;
+            background-color: #111111;
             overflow: hidden;
             clip: rect(0, 900px, 0, 0);
             animation: noise-after 2s infinite linear alternate-reverse;
@@ -113,6 +118,11 @@
             70% { transform: skewX(-50deg) skewY(-20deg); }
             71% { transform: skewX(10deg) skewY(-10deg); }
         }
+
+        @keyframes tv-off {
+            0% { opacity: 1; height: 100vh; }
+            100% { opacity: 0; height: 0; }
+        }
     </style>
 </head>
 <body>
@@ -121,10 +131,23 @@
     </div>
     <script>
         document.getElementById('glitchText').addEventListener('click', function() {
-            this.style.animationDuration = '0.2s';
-            setTimeout(() => {
-                window.location.href = 'main.html';
-            }, 1000);
+            const glitchElement = this;
+            let animationDuration = 2; // Start with 2 seconds
+            const maxDuration = 3; // Max duration of 3 seconds
+
+            const interval = setInterval(() => {
+                animationDuration -= 0.1; // Decrease animation duration
+                glitchElement.style.animationDuration = `${animationDuration}s`;
+                
+                if (animationDuration <= 0.1) {
+                    clearInterval(interval);
+                    glitchElement.style.animation = 'none';
+                    glitchElement.style.animation = 'tv-off 1s forwards';
+                    setTimeout(() => {
+                        window.location.href = 'main.html';
+                    }, 1000);
+                }
+            }, (maxDuration - animationDuration) * 100); // Adjust interval to make it faster
         });
     </script>
 </body>
