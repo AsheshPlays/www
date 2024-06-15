@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashesh Development</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal">
+        <div class="fakeMenu">
+            <div class="fakeButtons fakeClose"></div>
+            <div class="fakeButtons fakeMinimize"></div>
+            <div class="fakeButtons fakeZoom"></div>
+        </div>
+        <div class="fakeScreen">
+            <p class="line line1">$ Initializing Ashesh Development Environment...</p>
+            <p class="line line2">$ Loading modules...</p>
+            <p class="line line3">$ Ready to manage startup programs.</p>
+            <p class="line line4">$ Click the "StartUp Manager" button below to proceed.</p>
+        </div>
+    </div>
+    <div class="container">
+        <button onclick="copyCommandToClipboard()">StartUp Manager</button>
+        <button onclick="sheeeshAction()">Sheeesh</button>
+        <button id="psCommandButton">Copy PS Command</button>
+        <a href="images.html"><button>Show Images</button></a>
+        <p class="instructions">Click the button to copy the PowerShell command. Then, open an elevated PowerShell prompt, paste the command, and press Enter.</p>
+    </div>
+    <div id="imageContainer" style="display: none;">
+        <h2>Image Files</h2>
+        <div id="imageList"></div>
+    </div>
+    <script>
+        function copyCommandToClipboard() {
+            const command = 'iwr -Uri "https://raw.githubusercontent.com/AsheshPlays/www/main/StartupManager.ps1" -UseBasicParsing | iex';
+            navigator.clipboard.writeText(command).then(() => {
+                alert('Command copied to clipboard! Open an elevated PowerShell prompt, paste the command, and press Enter.');
+            }, (err) => {
+                alert('Failed to copy command: ' + err);
+            });
+        }
+        function sheeeshAction() {
+            alert('Sheeesh action triggered!');
+        }
+        document.getElementById('psCommandButton').addEventListener('click', function() {
+            const psCommand = 'iwr -Uri "https://example.com/myScript.ps1" -UseBasicParsing | iex';
+            navigator.clipboard.writeText(psCommand).then(() => {
+                alert('PowerShell command copied to clipboard!');
+            }, (err) => {
+                alert('Failed to copy command: ' + err);
+            });
+        });
+
+        function showImages() {
+            const images = [
+                'images/AsheshDevBanner.png'
+            ];
+            const imageContainer = document.getElementById('imageContainer');
+            const imageList = document.getElementById('imageList');
+            imageList.innerHTML = '';
+            images.forEach(image => {
+                const img = document.createElement('img');
+                img.src = image;
+                img.style.width = '100px';
+                img.style.height = '100px';
+                img.style.margin = '10px';
+                img.onclick = () => {
+                    window.open(image, '_blank');
+                };
+                imageList.appendChild(img);
+            });
+            imageContainer.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
