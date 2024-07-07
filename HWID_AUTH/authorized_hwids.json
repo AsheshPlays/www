@@ -1,0 +1,6 @@
+{
+    "authorized_hwids": [
+        "your_allowed_hwid_1",
+        "your_allowed_hwid_2"
+    ]
+}
